@@ -1,10 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw Line on Video</title>
+    <style>
+        #video-container {
+            position: relative;
+        }
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
 </head>
 <body>
-$END$
+<div id="video-container">
+    <video id="video" width="640" height="360" controls>
+        <source src="./video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <canvas id="canvas" width="640" height="360"></canvas>
+</div>
+
+<script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Draw a line on the canvas
+    function drawLine(x1, y1, x2, y2) {
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.strokeStyle = 'red'; // Line color
+        ctx.lineWidth = 2; // Line width
+        ctx.stroke();
+    }
+
+    // Listen for timeupdate event on the video to draw the line
+    video.addEventListener('timeupdate', function() {
+        // Clear previous drawings
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Example: Draw a line from (50, 50) to (200, 200) when video reaches 5 seconds
+        if (video.currentTime >= 5 && video.currentTime <= 6) {
+            drawLine(50, 50, 200, 200);
+        }
+    });
+</script>
 </body>
 </html>

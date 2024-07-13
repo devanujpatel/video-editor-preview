@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Processing with Selection</title>
+    <style>
+        #video {
+            display: none;
+        }
+
+        canvas {
+            border: 1px solid black;
+            margin-top: 10px;
+        }
+
+        #gridOverlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none; /* Ensure clicks pass through to the canvas */
+            z-index: 10; /* Ensure grid is above canvas */
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <input type="file" id="videoInput" accept="video/*">
+    <select id="aspectRatio">
+        <option value="9:18">9:18</option>
+        <option value="9:16">9:16</option>
+        <option value="4:3">4:3</option>
+        <option value="3:4">3:4</option>
+        <option value="1:1">1:1</option>
+        <option value="4:5">4:5</option>
+    </select>
+
+
+    <video id="video" controls></video>
+    <canvas id="canvas"></canvas>
+    <canvas id="roiCanvas"></canvas>
+
+    <!--<div id = "gridOverlay"></div>-->
+    <button id="startCropper">Start Cropper</button>
+    <button id="stopCropper">Stop Cropper</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
